@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 21:58:06 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/10 20:07:58 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/04/12 21:38:43 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ public:
 	Bureaucrat& operator=(const Bureaucrat& other);
 	virtual ~Bureaucrat( void );
 
-	std::string	getName( void ) const;
-	int			getGrade( void ) const;
+	const std::string&	getName( void ) const;
+	int					getGrade( void ) const;
 
-	void	incrementGrade( void );
-	void	decrementGrade( void );
+	void				incrementGrade( void );
+	void				decrementGrade( void );
 
 	class GradeTooHighException: public std::exception {
 		public:
@@ -41,13 +41,13 @@ public:
 	};
 
 private:
-	std::string	const	Name_;
+	const std::string	Name_;
 	int					Grade_;
 	const static int	LOWEST_GRADE_ = 150;
 	const static int	HIGHEST_GRADE_ = 1;
 
 };
 
-std::ostream& operator<<(std::ostream&, const Bureaucrat& Bureaucrat);
+std::ostream& operator<<(std::ostream&, const Bureaucrat& b);
 
 #endif

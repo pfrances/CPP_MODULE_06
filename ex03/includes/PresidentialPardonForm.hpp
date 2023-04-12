@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PresidentialPardonForm.hpp                            :+:      :+:    :+:   */
+/*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/03 21:58:06 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/12 14:56:12 by pfrances         ###   ########.fr       */
+/*   Created: 2023/04/12 16:54:47 by pfrances          #+#    #+#             */
+/*   Updated: 2023/04/12 22:41:14 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 class PresidentialPardonForm : public Form {
 public:
 	PresidentialPardonForm( void );
-	PresidentialPardonForm( std::string target);
+	PresidentialPardonForm( const std::string target);
 	PresidentialPardonForm(const PresidentialPardonForm& other);
 	PresidentialPardonForm& operator=(const PresidentialPardonForm& other);
 	virtual	~PresidentialPardonForm( void );
 
-	std::string	getTarget( void ) const;
+	const std::string&	getTarget( void ) const;
 
-	void		execute(Bureaucrat const & executor) const;
+	void				execute(const Bureaucrat& executor) const;
 
 private:
 	std::string			Target_;

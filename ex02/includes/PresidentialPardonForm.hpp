@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:54:47 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/12 16:54:51 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/04/12 22:23:15 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ public:
 	PresidentialPardonForm& operator=(const PresidentialPardonForm& other);
 	virtual	~PresidentialPardonForm( void );
 
-	std::string	getTarget( void ) const;
+	const std::string&	getTarget( void ) const;
 
-	void		execute(Bureaucrat const & executor) const;
+	void				execute(const Bureaucrat& executor) const;
 
 private:
 	std::string			Target_;

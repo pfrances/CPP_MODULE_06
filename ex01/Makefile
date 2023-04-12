@@ -6,13 +6,13 @@
 #    By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/26 11:07:21 by pfrances          #+#    #+#              #
-#    Updated: 2023/04/12 11:46:55 by pfrances         ###   ########.fr        #
+#    Updated: 2023/04/12 21:06:19 by pfrances         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = pgrm
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -g -fsanitize=address -MMD -MP
+NAME = prgm
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -g -fsanitize=address -MMD -MP
 INCLUDE = -I includes
 
 SRCS_DIR = ./srcs
@@ -25,11 +25,11 @@ OBJS = $(subst $(SRCS_DIR), $(OBJS_DIR), $(SRCS:.cpp=.o))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(INCLUDE) $(OBJS) -o $(NAME)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.cpp
 	@mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
 	rm -rf $(OBJS_DIR)

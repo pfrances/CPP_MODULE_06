@@ -5,23 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/12 16:55:20 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/12 16:55:23 by pfrances         ###   ########.fr       */
+/*   Created: 2023/04/12 16:54:36 by pfrances          #+#    #+#             */
+/*   Updated: 2023/04/12 22:56:12 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
+#include "Bureaucrat.hpp"
+#include <fstream>
+
 #define FORM_NAME_ "ShrubberyCreationForm"
 
 ShrubberyCreationForm::ShrubberyCreationForm( void ) : Form(FORM_NAME_, GRADE_TO_SIGN_, GRADE_TO_EXECUTE_), Target_("default") {
 	std::cout << "[ShrubberyCreationForm] default constructor called." << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm( std::string Target ) : Form(FORM_NAME_, GRADE_TO_SIGN_, GRADE_TO_EXECUTE_), Target_(Target) {
+ShrubberyCreationForm::ShrubberyCreationForm( const std::string Target ) : Form(FORM_NAME_, GRADE_TO_SIGN_, GRADE_TO_EXECUTE_), Target_(Target) {
 	std::cout << "[ShrubberyCreationForm] typed constructor called." << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other) :	Form(other), Target_(other.getTarget()) {
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other) : Form(other), Target_(other.getTarget()) {
 	std::cout << "[ShrubberyCreationForm] copy constructor called." << std::endl;
 }
 
@@ -38,11 +41,11 @@ ShrubberyCreationForm::~ShrubberyCreationForm( void ) {
 	std::cout << "[ShrubberyCreationForm] destructor called." << std::endl;
 }
 
-std::string ShrubberyCreationForm::getTarget( void ) const {
+const std::string& ShrubberyCreationForm::getTarget( void ) const {
 	return this->Target_;
 }
 
-void ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
+void ShrubberyCreationForm::execute(const Bureaucrat& executor) const {
 
 	if (this->checkRequirement(executor)) {
 		std::string	filename = this->Target_ + "_shrubbery";

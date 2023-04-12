@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 21:58:06 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/12 12:04:03 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/04/12 23:00:45 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,47 +15,47 @@
 
 # include <iostream>
 # include <exception>
-class Form;
-# include "Bureaucrat.hpp"
-
+class Bureaucrat;
 
 class Form {
 
 public:
 	Form( void );
-	Form( std::string Name, int GradeToSign, int GradeToExecute );
-	Form(const Form& other);
-	Form& operator=(const Form& other);
+	Form( const std::string Name, const int GradeToSign, const int GradeToExecute );
+	Form( const Form& other );
+	Form& operator=( const Form& other );
 	virtual ~Form( void );
 
-	std::string	getName( void ) const;
-	int			getGradeToSign( void ) const;
-	int			getGradeToExecute( void ) const;
-	bool		getSignState( void ) const;
+	const std::string&	getName( void ) const;
+	int					getGradeToSign( void ) const;
+	int					getGradeToExecute( void ) const;
+	bool				getSignState( void ) const;
 
-	void	beSigned(Bureaucrat& b);
+	void				beSigned(const Bureaucrat& b);
 
 	class GradeTooHighException: public std::exception {
 		public:
-			virtual const char* what() const throw();
+			virtual const char* what( void ) const throw();
 	};
 	class GradeTooLowException: public std::exception {
 		public:
-			virtual const char* what() const throw();
+			virtual const char* what( void ) const throw();
 	};
 	class IsAlreadySignedException: public std::exception {
 		public:
-			virtual const char* what() const throw();
+			virtual const char* what( void ) const throw();
 	};
 
 private:
 	std::string	const	Name_;
-	int					GradeToSign_;
-	int					GradeToExecute_;
+	const int			GradeToSign_;
+	const int			GradeToExecute_;
 	bool				IsSigned_;
 	const static int	LOWEST_GRADE_ = 150;
 	const static int	HIGHEST_GRADE_ = 1;
 
 };
+
+std::ostream& operator<<(std::ostream&, const Form& f);
 
 #endif

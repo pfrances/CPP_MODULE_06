@@ -6,11 +6,12 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:31:20 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/12 15:59:06 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/04/12 22:26:52 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
+#include "Bureaucrat.hpp"
 #define FORM_NAME_ "PresidentialPardonForm"
 
 PresidentialPardonForm::PresidentialPardonForm( void ) : Form(FORM_NAME_, GRADE_TO_SIGN_, GRADE_TO_EXECUTE_), Target_("default") {
@@ -38,12 +39,12 @@ PresidentialPardonForm::~PresidentialPardonForm( void ) {
 	std::cout << "[PresidentialPardonForm] destructor called." << std::endl;
 }
 
-std::string PresidentialPardonForm::getTarget( void ) const {
+const std::string& PresidentialPardonForm::getTarget( void ) const {
 	return this->Target_;
 }
 
-void PresidentialPardonForm::execute(Bureaucrat const & executor) const {
+void PresidentialPardonForm::execute(const Bureaucrat& executor) const {
 	if (this->checkRequirement(executor)) {
-		std::cout << executor << " was forgiven by Zaphod Beeblebrox." << std::endl;
+		std::cout << this->Target_ << " was forgiven by Zaphod Beeblebrox." << std::endl;
 	}
 }

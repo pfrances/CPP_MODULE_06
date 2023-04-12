@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 21:58:06 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/12 15:37:48 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/04/12 22:41:56 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,18 @@
 # define SHRUBBERY_CREATION_FORM_HPP
 
 # include "Form.hpp"
-# include <fstream>
-# include <iostream>
 
 class ShrubberyCreationForm : public Form {
 public:
 	ShrubberyCreationForm( void );
-	ShrubberyCreationForm( std::string target);
+	ShrubberyCreationForm( const std::string target);
 	ShrubberyCreationForm(const ShrubberyCreationForm& other);
 	ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
 	virtual	~ShrubberyCreationForm( void );
 
-	std::string	getTarget( void ) const;
+	const std::string&	getTarget( void ) const;
 
-	void		execute(Bureaucrat const & executor) const;
+	void				execute(const Bureaucrat& executor) const;
 
 private:
 	std::string			Target_;

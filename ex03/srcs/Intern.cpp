@@ -6,11 +6,14 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:55:33 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/12 16:55:35 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/04/12 22:40:18 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Intern.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 Intern::Intern( void ) {
 	std::cout << "[Intern] default constructor called." << std::endl;
@@ -31,7 +34,7 @@ Intern::~Intern( void ) {
 	std::cout << "[Intern] destructor called." << std::endl;
 }
 
-Form* Intern::makeForm(std::string Form_Name, std::string Target) const throw() {
+Form* Intern::makeForm(const std::string Form_Name, const std::string Target) const {
 
 	Form		*Form = NULL;
 	std::string	FormNamesArr[3] = {"shrubberry creation", "robotomy request", "presidential pardon"};

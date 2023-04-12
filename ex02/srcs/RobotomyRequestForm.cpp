@@ -6,11 +6,14 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:48:13 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/12 15:57:54 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/04/12 22:32:20 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
+#include "Bureaucrat.hpp"
+#include <cstdlib>
+
 #define FORM_NAME_ "RobotomyRequestForm"
 
 RobotomyRequestForm::RobotomyRequestForm( void ) : Form(FORM_NAME_, GRADE_TO_SIGN_, GRADE_TO_EXECUTE_), Target_("default") {
@@ -38,17 +41,16 @@ RobotomyRequestForm::~RobotomyRequestForm( void ) {
 	std::cout << "[RobotomyRequestForm] destructor called." << std::endl;
 }
 
-std::string RobotomyRequestForm::getTarget( void ) const {
+const std::string& RobotomyRequestForm::getTarget( void ) const {
 	return this->Target_;
 }
 
-void RobotomyRequestForm::execute(Bureaucrat const & executor) const {
+void RobotomyRequestForm::execute(const Bureaucrat& executor) const {
 	if (this->checkRequirement(executor)) {
 		std::cout << "* drilling noise * " << std::endl;
-		srand(time(NULL));
 		int rand_nb = rand() % 2;
 		if (rand_nb) {
-			std::cout << this->Target_ << " was successfully robotised!" << std::endl;
+			std::cout << this->Target_ << " was successfully robotomized!" << std::endl;
 		} else {
 			std::cout << this->Target_ << "'s robotomy has failed!" << std::endl;
 		}

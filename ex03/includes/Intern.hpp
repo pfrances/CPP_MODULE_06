@@ -13,10 +13,8 @@
 #ifndef INTERN_HPP
 # define INTERN_HPP
 
-class Intern;
-# include "PresidentialPardonForm.hpp"
-# include "RobotomyRequestForm.hpp"
-# include "ShrubberyCreationForm.hpp"
+# include <iostream>
+class Form;
 
 class Intern {
 
@@ -26,7 +24,7 @@ public:
 	Intern& operator=(const Intern& other);
 	virtual ~Intern( void );
 
-	Form *makeForm(std::string Form_Name, std::string Target) const throw();
+	Form *makeForm(const std::string Form_Name, const std::string Target) const;
 
 };
 

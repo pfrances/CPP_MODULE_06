@@ -6,24 +6,24 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:38:04 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/12 16:46:32 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/04/12 22:52:02 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Intern.hpp"
+#include "Form.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
-#include "Intern.hpp"
 #include <iostream>
+#include <cstdlib>
 
 void	update_grade(Bureaucrat& b, void (Bureaucrat::*func)(void)) {
 	try {
 		(b.*func)();
-	} catch(const Bureaucrat::GradeTooHighException& e) {
-		std::cerr << "GradeTooHighException catched: " << e.what() << std::endl;
-	} catch (const Bureaucrat::GradeTooLowException& e) {
-		std::cerr << "GradeTooLowException catched: " << e.what() << std::endl;
+	} catch (const std::exception& e) {
+		std::cerr << "exception catched: " << e.what() << std::endl;
 	}
 	std::cout << b << std::endl;
 }
@@ -39,16 +39,21 @@ void	TryToExecute(Form& f, Bureaucrat& b) {
 	std::cout << std::endl;
 }
 
-
 int	main(void) {
+	srand(time(NULL));
+
 	Bureaucrat b1("b1", 1);
+
 	std::cout << b1 << std::endl;
+
 	update_grade(b1, &Bureaucrat::decrementGrade);
 	update_grade(b1, &Bureaucrat::incrementGrade);
 	update_grade(b1, &Bureaucrat::incrementGrade);
 
 	Bureaucrat b2("b2", 150);
+
 	std::cout << b2 << std::endl;
+
 	update_grade(b2, &Bureaucrat::decrementGrade);
 
 	std::cout << std::endl;
@@ -61,8 +66,8 @@ int	main(void) {
 
 	std::cout << std::endl;
 
-	TryToExecute(f1, b2);
-	TryToExecute(f1, b1);
+	b2.executeForm(f1);
+	b1.executeForm(f1);
 
 	RobotomyRequestForm f2("Kevin");
 
@@ -72,8 +77,10 @@ int	main(void) {
 
 	std::cout << std::endl;
 
-	TryToExecute(f2, b2);
-	TryToExecute(f2, b1);
+	b2.executeForm(f2);
+	b1.executeForm(f2);
+
+	std::cout << std::endl;
 
 	PresidentialPardonForm f3("John");
 
@@ -83,13 +90,24 @@ int	main(void) {
 
 	std::cout << std::endl;
 
-	TryToExecute(f3, b2);
-	TryToExecute(f3, b1);
+	b2.executeForm(f3);
+	b1.executeForm(f3);
 
 	Intern someRandomIntern;
 	Form* f4 = someRandomIntern.makeForm("robotomy request", "Bender");
-	TryToExecute(*f4, b2);
+	b2.executeForm(*f4);
 	delete f4;
+
+	std::cout << std::endl;
+
+	Form* f5 = someRandomIntern.makeForm("robotomy request", "Bender");
+	b2.executeForm(*f5);
+	delete f5;
+
+	std::cout << std::endl;
+
+	Form* f6 = someRandomIntern.makeForm("Unvalid Name form", "Bob");
+	std::cout << "f6 ptr is equal to " << f6 << std::endl;
 
 	std::cout << std::endl;
 

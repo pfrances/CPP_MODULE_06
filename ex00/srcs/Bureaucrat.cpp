@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 21:57:59 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/12 12:10:44 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/04/12 21:43:20 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ Bureaucrat::Bureaucrat( void ) : Name_("Default name"), Grade_(LOWEST_GRADE_) {
 
 Bureaucrat::Bureaucrat( std::string Name, int Grade ) : Name_(Name), Grade_(Grade) {
 	if (this->Grade_ < HIGHEST_GRADE_)
-		this->Grade_ = HIGHEST_GRADE_;
+		throw Bureaucrat::GradeTooHighException();
 	else if (this->Grade_ > LOWEST_GRADE_)
-		this->Grade_ = LOWEST_GRADE_;
+		throw Bureaucrat::GradeTooLowException();
 	std::cout << "[Bureaucrat] typed constructor called." << std::endl;
 }
 
@@ -40,7 +40,7 @@ Bureaucrat::~Bureaucrat( void ) {
 	std::cout << "[Bureaucrat] destructor called." << std::endl;
 }
 
-std::string Bureaucrat::getName( void ) const {
+const std::string& Bureaucrat::getName( void ) const {
 	return this->Name_;
 }
 
@@ -68,13 +68,12 @@ void Bureaucrat::incrementGrade() {
 void Bureaucrat::decrementGrade() {
 	if (this->getGrade() < LOWEST_GRADE_) {
 		this->Grade_++;
-	}
-	else {
+	} else {
 		throw Bureaucrat::GradeTooLowException();
 	}
 }
 
-std::ostream& operator<<(std::ostream& stream, const Bureaucrat& Bureaucrat) {
-	stream << Bureaucrat.getName() << ", bureaucrat grade " << Bureaucrat.getGrade() << ".";
+std::ostream& operator<<(std::ostream& stream, const Bureaucrat& b) {
+	stream << b.getName() << ", bureaucrat grade " << b.getGrade();
 	return stream;
 }
