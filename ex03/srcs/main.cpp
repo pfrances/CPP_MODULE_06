@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:38:04 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/12 22:52:02 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/04/13 08:52:49 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,6 @@ void	update_grade(Bureaucrat& b, void (Bureaucrat::*func)(void)) {
 		std::cerr << "exception catched: " << e.what() << std::endl;
 	}
 	std::cout << b << std::endl;
-}
-
-void	TryToExecute(Form& f, Bureaucrat& b) {
-	try {
-		std::cout << b << " Try to execute " << f.getName() << std::endl;
-		b.executeForm(f);
-		std::cout << b << " was able to execute " << f.getName() << std::endl;
-	} catch(std::exception& e) {
-		std::cout << b << " has failed to execute " << f.getName() << std::endl;
-	}
-	std::cout << std::endl;
 }
 
 int	main(void) {
