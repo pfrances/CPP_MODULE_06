@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:38:04 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/12 22:35:55 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/04/13 10:48:43 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int	main(void) {
 
 	b2.executeForm(f3);
 	b1.executeForm(f3);
+
+	std::cout << std::endl;
 
 	return 0;
 }
