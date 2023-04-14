@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:55:33 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/12 22:40:18 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/04/14 11:55:01 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ Intern::~Intern( void ) {
 	std::cout << "[Intern] destructor called." << std::endl;
 }
 
-Form* Intern::makeForm(const std::string Form_Name, const std::string Target) const {
+AForm* Intern::makeForm(const std::string Form_Name, const std::string Target) const {
 
-	Form		*Form = NULL;
-	std::string	FormNamesArr[3] = {"shrubberry creation", "robotomy request", "presidential pardon"};
+	AForm		*Form = NULL;
+	std::string	FormNamesArr[3] = {"shrubbery creation", "robotomy request", "presidential pardon"};
 	size_t		i;
 
 	for (i = 0; i < (sizeof(FormNamesArr) / sizeof(std::string)); i++) {
@@ -57,7 +57,7 @@ Form* Intern::makeForm(const std::string Form_Name, const std::string Target) co
 			break;
 		default:
 			std::cerr << "invalid form name. Please choose from the list below:" << std::endl;
-			std::cerr << "	shrubberry creation" << std::endl;
+			std::cerr << "	shrubbery creation" << std::endl;
 			std::cerr << "	robotomy request" << std::endl;
 			std::cerr << "	presidential pardon" << std::endl;
 			break;

@@ -6,13 +6,13 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:38:04 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/13 08:52:49 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/04/14 11:58:13 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 #include "Intern.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
@@ -83,19 +83,21 @@ int	main(void) {
 	b1.executeForm(f3);
 
 	Intern someRandomIntern;
-	Form* f4 = someRandomIntern.makeForm("robotomy request", "Bender");
+	AForm* f4 = someRandomIntern.makeForm("robotomy request", "Bender");
 	b2.executeForm(*f4);
 	delete f4;
 
 	std::cout << std::endl;
 
-	Form* f5 = someRandomIntern.makeForm("robotomy request", "Bender");
+	AForm* f5 = someRandomIntern.makeForm("presidential pardon", "Tom");
+	b2.executeForm(*f5);
+	b1.signForm(*f5);
 	b2.executeForm(*f5);
 	delete f5;
 
 	std::cout << std::endl;
 
-	Form* f6 = someRandomIntern.makeForm("Unvalid Name form", "Bob");
+	AForm* f6 = someRandomIntern.makeForm("Unvalid Name form", "Bob");
 	std::cout << "f6 ptr is equal to " << f6 << std::endl;
 
 	std::cout << std::endl;

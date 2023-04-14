@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 21:58:06 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/12 22:07:25 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/04/14 11:55:01 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 # include <exception>
 class Bureaucrat;
 
-class Form {
+class AForm {
 public:
-	Form( void );
-	Form( std::string Name, int GradeToSign, int GradeToExecute );
-	Form(const Form& other);
-	Form& operator=(const Form& other);
-	virtual ~Form( void );
+	AForm( void );
+	AForm( const std::string Name, const int GradeToSign, const int GradeToExecute );
+	AForm(const AForm& other);
+	AForm& operator=(const AForm& other);
+	virtual ~AForm( void );
 
 	const std::string&	getName( void ) const;
 	int					getGradeToSign( void ) const;
@@ -33,27 +33,27 @@ public:
 	void				beSigned(const Bureaucrat& b);
 
 	virtual void		execute(const Bureaucrat& executor) const = 0;
-	bool				checkRequirement(Bureaucrat const & b) const;
+	bool				checkRequirement(const Bureaucrat& b) const;
 
 	class GradeTooHighException: public std::exception {
 		public:
-			virtual const char* what() const throw();
+			virtual const char* what( void ) const throw();
 	};
 	class GradeTooLowException: public std::exception {
 		public:
-			virtual const char* what() const throw();
+			virtual const char* what( void ) const throw();
 	};
 	class IsAlreadySignedException: public std::exception {
 		public:
-			virtual const char* what() const throw();
+			virtual const char* what( void ) const throw();
 	};
 	class IsNotSignedException: public std::exception {
 		public:
-			virtual const char* what() const throw();
+			virtual const char* what( void ) const throw();
 	};
 
 private:
-	std::string	const	Name_;
+	const std::string	Name_;
 	const int			GradeToSign_;
 	const int			GradeToExecute_;
 	bool				IsSigned_;
@@ -62,6 +62,6 @@ private:
 
 };
 
-std::ostream& operator<<(std::ostream&, const Form& f);
+std::ostream& operator<<(std::ostream&, const AForm& f);
 
 #endif

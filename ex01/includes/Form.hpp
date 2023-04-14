@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 21:58:06 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/12 23:00:45 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/04/14 12:08:15 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ public:
 	};
 
 private:
-	std::string	const	Name_;
+	const std::string	Name_;
 	const int			GradeToSign_;
 	const int			GradeToExecute_;
 	bool				IsSigned_;

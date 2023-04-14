@@ -14,7 +14,7 @@
 # define INTERN_HPP
 
 # include <iostream>
-class Form;
+class AForm;
 
 class Intern {
 
@@ -24,7 +24,7 @@ public:
 	Intern& operator=(const Intern& other);
 	virtual ~Intern( void );
 
-	Form *makeForm(const std::string Form_Name, const std::string Target) const;
+	AForm *makeForm(const std::string Form_Name, const std::string Target) const;
 
 };
 

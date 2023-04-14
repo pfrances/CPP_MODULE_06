@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 21:58:06 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/12 22:58:28 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/04/14 11:55:01 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 # include <exception>
 class Bureaucrat;
 
-class Form {
+class AForm {
 public:
-	Form( void );
-	Form( const std::string Name, const int GradeToSign, const int GradeToExecute );
-	Form(const Form& other);
-	Form& operator=(const Form& other);
-	virtual ~Form( void );
+	AForm( void );
+	AForm( const std::string Name, const int GradeToSign, const int GradeToExecute );
+	AForm(const AForm& other);
+	AForm& operator=(const AForm& other);
+	virtual ~AForm( void );
 
 	const std::string&	getName( void ) const;
 	int					getGradeToSign( void ) const;
@@ -62,6 +62,6 @@ private:
 
 };
 
-std::ostream& operator<<(std::ostream&, const Form& f);
+std::ostream& operator<<(std::ostream&, const AForm& f);
 
 #endif

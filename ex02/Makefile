@@ -6,7 +6,7 @@
 #    By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/26 11:07:21 by pfrances          #+#    #+#              #
-#    Updated: 2023/04/12 21:06:23 by pfrances         ###   ########.fr        #
+#    Updated: 2023/04/14 12:04:20 by pfrances         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRCS_DIR = ./srcs
 OBJS_DIR = ./objs
 SRCS = $(addprefix $(SRCS_DIR)/,	main.cpp					\
 									Bureaucrat.cpp				\
-									Form.cpp					\
+									AForm.cpp					\
 									ShrubberyCreationForm.cpp	\
 									RobotomyRequestForm.cpp		\
 									PresidentialPardonForm.cpp)

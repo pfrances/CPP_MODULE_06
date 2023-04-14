@@ -6,16 +6,16 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:54:47 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/12 22:41:14 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/04/14 11:56:59 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRESIDENTIAL_PARDON_FORM_HPP
 # define PRESIDENTIAL_PARDON_FORM_HPP
 
-# include "Form.hpp"
+# include "AForm.hpp"
 
-class PresidentialPardonForm : public Form {
+class PresidentialPardonForm : public AForm {
 public:
 	PresidentialPardonForm( void );
 	PresidentialPardonForm( const std::string target);

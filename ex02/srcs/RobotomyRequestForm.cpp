@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:48:13 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/12 22:32:20 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/04/14 12:01:04 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 #include "Bureaucrat.hpp"
 #include <cstdlib>
 
-#define FORM_NAME_ "RobotomyRequestForm"
+#define FORM_NAME "RobotomyRequestForm"
 
-RobotomyRequestForm::RobotomyRequestForm( void ) : Form(FORM_NAME_, GRADE_TO_SIGN_, GRADE_TO_EXECUTE_), Target_("default") {
+RobotomyRequestForm::RobotomyRequestForm( void ) : AForm(FORM_NAME, GRADE_TO_SIGN_, GRADE_TO_EXECUTE_), Target_("default") {
 	std::cout << "[RobotomyRequestForm] default constructor called." << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm( std::string Target ) : Form(FORM_NAME_, GRADE_TO_SIGN_, GRADE_TO_EXECUTE_), Target_(Target) {
+RobotomyRequestForm::RobotomyRequestForm( const std::string Target ) : AForm(FORM_NAME, GRADE_TO_SIGN_, GRADE_TO_EXECUTE_), Target_(Target) {
 	std::cout << "[RobotomyRequestForm] typed constructor called." << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other) :	Form(other), Target_(other.getTarget()) {
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other) : AForm(other), Target_(other.getTarget()) {
 	std::cout << "[RobotomyRequestForm] copy constructor called." << std::endl;
 }
 
 RobotomyRequestForm&	RobotomyRequestForm::operator=(const RobotomyRequestForm& other) {
 	if (this != &other) {
-		Form::operator=(other);
+		AForm::operator=(other);
 		this->Target_ = other.getTarget();
 	}
 	std::cout << "[RobotomyRequestForm] asignment called." << std::endl;

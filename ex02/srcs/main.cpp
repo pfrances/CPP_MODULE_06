@@ -6,12 +6,12 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:38:04 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/13 10:48:43 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/04/14 12:07:37 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
@@ -54,6 +54,8 @@ int	main(void) {
 
 	RobotomyRequestForm f2("Kevin");
 
+	b2.executeForm(f2);
+	b1.executeForm(f2);
 	b2.signForm(f2);
 	b1.signForm(f2);
 	b1.signForm(f2);

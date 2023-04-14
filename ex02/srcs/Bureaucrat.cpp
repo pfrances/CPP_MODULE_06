@@ -6,18 +6,18 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 21:57:59 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/12 22:14:29 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/04/14 11:58:53 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat( void ) : Name_("Default name"), Grade_(LOWEST_GRADE_) {
 	std::cout << "[Bureaucrat] default constructor called." << std::endl;
 }
 
-Bureaucrat::Bureaucrat( std::string Name, int Grade ) : Name_(Name), Grade_(Grade) {
+Bureaucrat::Bureaucrat( const std::string Name, const int Grade ) : Name_(Name), Grade_(Grade) {
 	if (this->Grade_ < HIGHEST_GRADE_)
 		throw Bureaucrat::GradeTooHighException();
 	else if (this->Grade_ > LOWEST_GRADE_)
@@ -49,15 +49,15 @@ int Bureaucrat::getGrade( void ) const {
 	return this->Grade_;
 }
 
-const char* Bureaucrat::GradeTooLowException::what() const throw() {
+const char* Bureaucrat::GradeTooLowException::what( void ) const throw() {
 	return "Grade is too low";
 }
 
-const char* Bureaucrat::GradeTooHighException::what() const throw() {
+const char* Bureaucrat::GradeTooHighException::what( void ) const throw() {
 	return "Grade is too high";
 }
 
-void Bureaucrat::incrementGrade() {
+void Bureaucrat::incrementGrade( void ) {
 	if (this->getGrade() > HIGHEST_GRADE_) {
 		this->Grade_--;
 	}
@@ -66,7 +66,7 @@ void Bureaucrat::incrementGrade() {
 	}
 }
 
-void Bureaucrat::decrementGrade() {
+void Bureaucrat::decrementGrade( void ) {
 	if (this->getGrade() < LOWEST_GRADE_) {
 		this->Grade_++;
 	} else {
@@ -74,7 +74,7 @@ void Bureaucrat::decrementGrade() {
 	}
 }
 
-void Bureaucrat::signForm(Form& f) const {
+void Bureaucrat::signForm(AForm& f) const {
 	try {
 		f.beSigned(*this);
 		std::cout << this->Name_ << " signed " << f.getName() << std::endl;
@@ -83,7 +83,7 @@ void Bureaucrat::signForm(Form& f) const {
 	}
 }
 
-void Bureaucrat::executeForm(const Form& f) const {
+void Bureaucrat::executeForm(const AForm& f) const {
 	try {
 		f.execute(*this);
 		std::cout << this->getName() << " executed " << f.getName() << std::endl;

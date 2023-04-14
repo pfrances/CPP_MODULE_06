@@ -6,12 +6,12 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 21:57:59 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/12 22:54:52 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/04/14 11:58:53 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat( void ) : Name_("Default name"), Grade_(LOWEST_GRADE_) {
 	std::cout << "[Bureaucrat] default constructor called." << std::endl;
@@ -74,7 +74,7 @@ void Bureaucrat::decrementGrade( void ) {
 	}
 }
 
-void Bureaucrat::signForm(Form& f) const {
+void Bureaucrat::signForm(AForm& f) const {
 	try {
 		f.beSigned(*this);
 		std::cout << this->Name_ << " signed " << f.getName() << std::endl;
@@ -83,7 +83,7 @@ void Bureaucrat::signForm(Form& f) const {
 	}
 }
 
-void Bureaucrat::executeForm(const Form& f) const {
+void Bureaucrat::executeForm(const AForm& f) const {
 	try {
 		f.execute(*this);
 		std::cout << this->getName() << " executed " << f.getName() << std::endl;
