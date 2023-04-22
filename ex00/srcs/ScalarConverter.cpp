@@ -1,0 +1,139 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ScalarConverter.cpp                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/03 21:57:59 by pfrances          #+#    #+#             */
+/*   Updated: 2023/04/22 17:36:46 by pfrances         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ScalarConverter.hpp"
+
+#include <iostream>
+#include <string>
+#include <limits>
+
+enum e_type {
+	_char,
+	_int,
+	_float,
+	_double,
+	error
+};
+
+bool	is_char(std::string& str) {
+	if (str.length() == 1 && !std::isdigit(str[0]))
+		return true;
+	else if (str.length() == 3 && str[0] == '\'' && str[2] == '\'')
+		return true;
+	else
+		return false;
+}
+
+bool	is_int(std::string& str) {
+	if (std::isdigit(str[0]) || str[0] == '-' || str[0] == '+') {
+		for (size_t i = 1; i < str.length(); i++) {
+			if (!std::isdigit(str[i]))
+				return false;
+		}
+		return true;
+	}
+	else
+		return false;
+}
+
+bool	isPseudoLiteral(std::string& str) {
+	if (str == "nan" || str == "nanf" || str == "+inf" || str == "+inff" || str == "-inf" || str == "-inff")
+		return true;
+	else
+		return false;
+}
+
+bool	is_float(std::string& str) {
+	if (isPseudoLiteral(str) && str[str.length() - 1] == 'f')
+		return true;
+	else if (std::isdigit(str[0]) || str[0] == '-' || str[0] == '+') {
+		for (size_t i = 1; i < str.length() - 1; i++) {
+			if (!std::isdigit(str[i]) && str[i] != '.')
+				return false;
+		}
+		return (str[str.length() - 1] == 'f');
+	}
+	else
+		return false;
+}
+
+bool	is_double(std::string& str) {
+	if (isPseudoLiteral(str) && str[str.length() - 1] != 'f')
+		return true;
+	else if (std::isdigit(str[0]) || str[0] == '-' || str[0] == '+') {
+		for (size_t i = 1; i < str.length(); i++) {
+			if (!std::isdigit(str[i]) && str[i] != '.')
+				return false;
+		}
+		return true;
+	}
+	else
+		return false;
+}
+
+e_type	get_type(std::string& str){
+	if (is_char(str))
+		return _char;
+	else if (is_int(str))
+		return _int;
+	else if (is_float(str))
+		return _float;
+	else if (is_double(str))
+		return _double;
+	else
+		return error;
+}
+
+void ScalarConverter::convert(const std::string& str) {
+	char char_value;
+	int int_value;
+	float float_value;
+	double double_value;
+
+	switch (get_type(const_cast<std::string&>(str)))
+	{
+		case _char:
+			char_value = str[0];
+			int_value = static_cast<int>(char_value);
+			float_value = static_cast<float>(char_value);
+			double_value = static_cast<double>(char_value);
+			break;
+		case _int:
+			int_value = std::stoi(str);
+			char_value = static_cast<char>(int_value);
+			float_value = static_cast<float>(int_value);
+			double_value = static_cast<double>(int_value);
+			break;
+		case _float:
+			float_value = std::stof(str);
+			char_value = static_cast<char>(float_value);
+			int_value = static_cast<int>(float_value);
+			double_value = static_cast<double>(float_value);
+			break;
+		case _double:
+			double_value = std::stod(str);
+			char_value = static_cast<char>(double_value);
+			int_value = static_cast<int>(double_value);
+			float_value = static_cast<float>(double_value);
+			break;
+		default:
+			std::cout << "Invalid input" << std::endl;
+		return;
+	}
+	if (std::isprint(char_value))
+		std::cout << "char: '" << char_value << "'" << std::endl;
+	else
+		std::cout << "char: Non displayable" << std::endl;
+	std::cout << "int: " << int_value << std::endl;
+	std::cout << "float: " << float_value << "f" << std::endl;
+	std::cout << "double: " << double_value << std::endl;
+}

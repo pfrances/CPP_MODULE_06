@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 21:38:04 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/22 16:52:28 by pfrances         ###   ########.fr       */
+/*   Created: 2023/03/03 21:58:06 by pfrances          #+#    #+#             */
+/*   Updated: 2023/04/22 16:46:13 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
-#include <iostream>
+#ifndef SCALARCONVERTER_HPP
+# define SCALARCONVERTER_HPP
 
-int	main(int argc, char* argv[]) {
-	if (argc != 2) {
-		std::cerr << "Usage: " << argv[0] << " <literal>" << std::endl;
-		return 1;
-	}
+# include <string>
 
-	ScalarConverter::convert(argv[1]);
+class ScalarConverter {
+public:
+	static void convert(const std::string& str);
+};
 
-	return 0;
-}
+#endif
+
