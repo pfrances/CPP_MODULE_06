@@ -6,7 +6,7 @@
 #    By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/26 11:07:21 by pfrances          #+#    #+#              #
-#    Updated: 2023/05/04 10:43:17 by pfrances         ###   ########.fr        #
+#    Updated: 2023/05/04 19:21:36 by pfrances         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ INCLUDE = -I includes
 
 SRCS_DIR = ./srcs
 OBJS_DIR = ./objs
-SRCS = $(addprefix $(SRCS_DIR)/,	main.cpp)
+SRCS = $(addprefix $(SRCS_DIR)/,	main.cpp	\
+									Data.cpp)
 OBJS = $(subst $(SRCS_DIR), $(OBJS_DIR), $(SRCS:.cpp=.o))
 
 all: $(NAME)

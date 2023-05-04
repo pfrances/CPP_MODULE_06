@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Data.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 21:38:04 by pfrances          #+#    #+#             */
-/*   Updated: 2023/05/04 19:24:26 by pfrances         ###   ########.fr       */
+/*   Created: 2023/05/04 19:19:29 by pfrances          #+#    #+#             */
+/*   Updated: 2023/05/04 19:23:45 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
-#include <iostream>
-#include <iomanip>
+#include "Data.hpp"
 
-int	main(int argc, char* argv[]) {
-	if (argc != 2) {
-		std::cerr << "Usage: " << argv[0] << " <literal>" << std::endl;
-		return 1;
-	}
+Data::~Data(void) {
+	
+}
 
-	std::cout << std::setprecision(10);
-	ScalarConverter::convert(argv[1]);
+uintptr_t	Data::serialize(Data* ptr) {
+	return reinterpret_cast<uintptr_t>(ptr);
+}
 
-	return 0;
+Data*		Data::deserialize(uintptr_t raw) {
+	return reinterpret_cast<Data*>(raw);
 }

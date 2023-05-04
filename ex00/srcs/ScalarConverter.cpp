@@ -6,13 +6,14 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 21:57:59 by pfrances          #+#    #+#             */
-/*   Updated: 2023/05/04 11:53:11 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/05/04 19:11:29 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 
 #include <iostream>
+#include <cmath>
 #include <string>
 #include <limits>
 
@@ -23,6 +24,10 @@ enum e_type {
 	_double,
 	error
 };
+
+ScalarConverter::~ScalarConverter() {
+
+}
 
 static bool	is_char(std::string& str) {
 	if (str.length() == 1 && !std::isdigit(str[0]))
@@ -160,7 +165,9 @@ void ScalarConverter::convert(const std::string& str) {
 		std::cout << "char: '" << char_value << "'" << std::endl;
 	else
 		std::cout << "char: Non displayable" << std::endl;
-	if (double_value < std::numeric_limits<int>::min() || double_value > std::numeric_limits<int>::max())
+	if (double_value < std::numeric_limits<int>::min()
+		|| double_value > std::numeric_limits<int>::max()
+		|| std::isnan(double_value))
 		std::cout << "int: impossible" << std::endl;
 	else
 		std::cout << "int: " << int_value << std::endl;
