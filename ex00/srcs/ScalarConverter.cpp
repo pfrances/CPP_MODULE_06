@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 21:57:59 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/22 21:17:25 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/05/04 11:53:11 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,15 @@ static bool	is_float(std::string& str) {
 	if (isPseudoLiteral(str) && str[str.length() - 1] == 'f')
 		return true;
 	else if (std::isdigit(str[0]) || str[0] == '-' || str[0] == '+') {
+		bool	has_dot = false;
 		for (size_t i = 1; i < str.length() - 1; i++) {
 			if (!std::isdigit(str[i]) && str[i] != '.')
 				return false;
+			if (str[i] == '.') {
+				if (has_dot)
+					return false;
+				has_dot = true;
+			}
 		}
 		if (str[str.length() - 1] == 'f') {
 			try {
@@ -81,9 +87,15 @@ static bool	is_double(std::string& str) {
 	if (isPseudoLiteral(str) && str[str.length() - 1] != 'f')
 		return true;
 	else if (std::isdigit(str[0]) || str[0] == '-' || str[0] == '+') {
+		bool	has_dot = false;
 		for (size_t i = 1; i < str.length(); i++) {
 			if (!std::isdigit(str[i]) && str[i] != '.')
 				return false;
+			if (str[i] == '.') {
+				if (has_dot)
+					return false;
+				has_dot = true;
+			}
 		}
 		try {
 			std::stod(str);
