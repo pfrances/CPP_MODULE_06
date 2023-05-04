@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 21:57:59 by pfrances          #+#    #+#             */
-/*   Updated: 2023/04/22 17:36:46 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/04/22 21:17:25 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ enum e_type {
 	error
 };
 
-bool	is_char(std::string& str) {
+static bool	is_char(std::string& str) {
 	if (str.length() == 1 && !std::isdigit(str[0]))
 		return true;
 	else if (str.length() == 3 && str[0] == '\'' && str[2] == '\'')
@@ -33,11 +33,16 @@ bool	is_char(std::string& str) {
 		return false;
 }
 
-bool	is_int(std::string& str) {
+static bool	is_int(std::string& str) {
 	if (std::isdigit(str[0]) || str[0] == '-' || str[0] == '+') {
 		for (size_t i = 1; i < str.length(); i++) {
 			if (!std::isdigit(str[i]))
 				return false;
+		}
+		try {
+			std::stoi(str);
+		} catch (std::exception& e) {
+			return false;
 		}
 		return true;
 	}
@@ -45,14 +50,14 @@ bool	is_int(std::string& str) {
 		return false;
 }
 
-bool	isPseudoLiteral(std::string& str) {
+static bool	isPseudoLiteral(std::string& str) {
 	if (str == "nan" || str == "nanf" || str == "+inf" || str == "+inff" || str == "-inf" || str == "-inff")
 		return true;
 	else
 		return false;
 }
 
-bool	is_float(std::string& str) {
+static bool	is_float(std::string& str) {
 	if (isPseudoLiteral(str) && str[str.length() - 1] == 'f')
 		return true;
 	else if (std::isdigit(str[0]) || str[0] == '-' || str[0] == '+') {
@@ -60,13 +65,19 @@ bool	is_float(std::string& str) {
 			if (!std::isdigit(str[i]) && str[i] != '.')
 				return false;
 		}
-		return (str[str.length() - 1] == 'f');
+		if (str[str.length() - 1] == 'f') {
+			try {
+				std::stof(str);
+			} catch (std::exception& e) {
+				return false;
+			}
+			return true;
+		}
 	}
-	else
-		return false;
+	return false;
 }
 
-bool	is_double(std::string& str) {
+static bool	is_double(std::string& str) {
 	if (isPseudoLiteral(str) && str[str.length() - 1] != 'f')
 		return true;
 	else if (std::isdigit(str[0]) || str[0] == '-' || str[0] == '+') {
@@ -74,13 +85,17 @@ bool	is_double(std::string& str) {
 			if (!std::isdigit(str[i]) && str[i] != '.')
 				return false;
 		}
+		try {
+			std::stod(str);
+		} catch (std::exception& e) {
+			return false;
+		}
 		return true;
 	}
-	else
-		return false;
+	return false;
 }
 
-e_type	get_type(std::string& str){
+static e_type	get_type(std::string& str){
 	if (is_char(str))
 		return _char;
 	else if (is_int(str))
@@ -133,7 +148,16 @@ void ScalarConverter::convert(const std::string& str) {
 		std::cout << "char: '" << char_value << "'" << std::endl;
 	else
 		std::cout << "char: Non displayable" << std::endl;
-	std::cout << "int: " << int_value << std::endl;
-	std::cout << "float: " << float_value << "f" << std::endl;
-	std::cout << "double: " << double_value << std::endl;
+	if (double_value < std::numeric_limits<int>::min() || double_value > std::numeric_limits<int>::max())
+		std::cout << "int: impossible" << std::endl;
+	else
+		std::cout << "int: " << int_value << std::endl;
+	if (float_value - static_cast<int>(float_value) == 0.0f)
+		std::cout << "float: " << float_value << ".0f" << std::endl;
+	else
+		std::cout << "float: " << float_value << "f" << std::endl;
+	if (double_value == static_cast<int>(double_value))
+		std::cout << "double: " << double_value << ".0" << std::endl;
+	else
+		std::cout << "double: " << double_value << std::endl;
 }

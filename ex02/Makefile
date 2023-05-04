@@ -6,7 +6,7 @@
 #    By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/26 11:07:21 by pfrances          #+#    #+#              #
-#    Updated: 2023/04/14 12:04:20 by pfrances         ###   ########.fr        #
+#    Updated: 2023/05/04 11:28:22 by pfrances         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,8 @@ INCLUDE = -I includes
 
 SRCS_DIR = ./srcs
 OBJS_DIR = ./objs
-SRCS = $(addprefix $(SRCS_DIR)/,	main.cpp					\
-									Bureaucrat.cpp				\
-									AForm.cpp					\
-									ShrubberyCreationForm.cpp	\
-									RobotomyRequestForm.cpp		\
-									PresidentialPardonForm.cpp)
+SRCS = $(addprefix $(SRCS_DIR)/,	main.cpp	\
+									Classes.cpp)
 OBJS = $(subst $(SRCS_DIR), $(OBJS_DIR), $(SRCS:.cpp=.o))
 
 all: $(NAME)
@@ -39,7 +35,6 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f *_shrubbery
 
 re: fclean all
 

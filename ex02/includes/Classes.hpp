@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Classes.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 21:38:04 by pfrances          #+#    #+#             */
-/*   Updated: 2023/05/04 11:28:53 by pfrances         ###   ########.fr       */
+/*   Created: 2023/05/04 11:01:08 by pfrances          #+#    #+#             */
+/*   Updated: 2023/05/04 11:28:42 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <cstdlib>
-#include "Classes.hpp"
+#ifndef CLASSES_HPP
+# define CLASSES_HPP
 
-int	main(void) {
-	srand(time(NULL));
+class Base {
+public:
+	virtual ~Base() {};
+};
 
-	for (int i = 0; i < 5; i++) {
-		Base* base = generate();
-		identify(base);
-		identify(*base);
-		delete base;
-		std::cout << std::endl;
-	}
-	return 0;
-}
+class A : public Base {};
+class B : public Base {};
+class C : public Base {};
+
+Base*	generate(void);
+void	identify(Base* p);
+void	identify(Base& p);
+
+#endif
