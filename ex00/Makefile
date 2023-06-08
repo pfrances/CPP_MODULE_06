@@ -6,13 +6,13 @@
 #    By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/26 11:07:21 by pfrances          #+#    #+#              #
-#    Updated: 2023/04/22 18:12:49 by pfrances         ###   ########.fr        #
+#    Updated: 2023/06/08 21:37:20 by pfrances         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = prgm
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -g -fsanitize=address -MMD -MP
+CXXFLAGS = -Wall -Wextra -Werror -MMD -MP
 INCLUDE = -I includes
 
 SRCS_DIR = ./srcs
@@ -38,6 +38,9 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+debug: CXXFLAGS += -g -fsanitize=address
+debug: re
+
+.PHONY: all clean fclean re debug
 
 -include $(DEPS)

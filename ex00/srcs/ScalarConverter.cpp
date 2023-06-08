@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 21:57:59 by pfrances          #+#    #+#             */
-/*   Updated: 2023/05/04 19:11:29 by pfrances         ###   ########.fr       */
+/*   Updated: 2023/06/08 21:51:30 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,9 @@ void ScalarConverter::convert(const std::string& str) {
 	}
 	if (std::isprint(char_value))
 		std::cout << "char: '" << char_value << "'" << std::endl;
+	else if (double_value < std::numeric_limits<char>::min()
+		|| double_value > std::numeric_limits<char>::max())
+		std::cout << "char: impossible" << std::endl;
 	else
 		std::cout << "char: Non displayable" << std::endl;
 	if (double_value < std::numeric_limits<int>::min()
